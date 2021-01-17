@@ -40,9 +40,9 @@ export default {
   beforeMount() {
     // Cookies do not get saved on localhost so redirect
     let url = window.location.href.split("/")[2];
-    if (url != "127.0.0.1:8080") {
-      window.location.href = "http://127.0.0.1:8080/";
-    }
+    // if (url != "127.0.0.1:8080") {
+    //   window.location.href = "http://127.0.0.1:8080/";
+    // }
     this.getUser();
   }
 };
