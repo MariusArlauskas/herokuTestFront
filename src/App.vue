@@ -4,7 +4,15 @@
     <ProfileBar v-if="GET_USER.id && drawer" />
     <v-content
       class="mainBackground"
-      :style="[this.$vuetify.breakpoint.md || this.$vuetify.breakpoint.lg || this.$vuetify.breakpoint.xl ? 'padding-top: 60px;' : 'padding-top: 5px;'] + ' height:auto; width:100%'"
+      :style="
+        [
+          this.$vuetify.breakpoint.md ||
+          this.$vuetify.breakpoint.lg ||
+          this.$vuetify.breakpoint.xl
+            ? 'padding-top: 60px;'
+            : 'padding-top: 5px;',
+        ] + ' height:auto; width:100%'
+      "
     >
       <router-view />
     </v-content>
@@ -26,7 +34,7 @@ export default {
   methods: {
     getUser() {
       this.$store.commit("SET_USER_FROM_SESSION");
-    }
+    },
   },
   computed: {
     ...mapGetters(["GET_USER_DRAWER", "GET_USER"]),
@@ -34,17 +42,17 @@ export default {
       get() {
         return this.$store.getters.GET_USER_DRAWER;
       },
-      set() {}
-    }
+      set() {},
+    },
   },
   beforeMount() {
     // Cookies do not get saved on localhost so redirect
-    let url = window.location.href.split("/")[2];
+    // let url = window.location.href.split("/")[2];
     // if (url != "127.0.0.1:8080") {
     //   window.location.href = "http://127.0.0.1:8080/";
     // }
     this.getUser();
-  }
+  },
 };
 </script>
 
