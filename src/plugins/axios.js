@@ -3,7 +3,8 @@
 import Vue from 'vue';
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+// axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+axios.defaults.baseURL = 'https://my-movies-site-test-prod.herokuapp.com/api/';
 axios.defaults.withCredentials = true;
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
