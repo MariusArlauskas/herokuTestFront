@@ -80,7 +80,7 @@ const actions = {
       axios
         .post(`login_check`, payload)
         .then(({ status }) => {
-          if (status === 200) {
+          if (status === 200 || status == 204) {
             dispatch('SET_USER', payload);
             resolve(true);
           }

@@ -2,16 +2,22 @@
   <v-layout style="height: 100%" align-center justify-center>
     <v-flex xs10 sm6 md6 xl5>
       <v-form>
-        <v-card flat dark style="border-radius:40px; margin-bottom:10%" color="secondary">
+        <v-card
+          flat
+          dark
+          style="border-radius: 40px; margin-bottom: 10%"
+          color="secondary"
+        >
           <v-toolbar flat color="transparent">
-            <v-toolbar-title class="text-center font-weight-bold" style="width:100%">Login</v-toolbar-title>
+            <v-toolbar-title
+              class="text-center font-weight-bold"
+              style="width: 100%"
+              >Login</v-toolbar-title
+            >
           </v-toolbar>
-          <v-alert
-            class="ml-7 mr-7"
-            color="error"
-            :value="error"
-            icon="close"
-          >The username or password is incorrect!</v-alert>
+          <v-alert class="ml-7 mr-7" color="error" :value="error" icon="close"
+            >The username or password is incorrect!</v-alert
+          >
 
           <v-card-text class="justify-center">
             <v-text-field
@@ -33,7 +39,9 @@
             ></v-text-field>
           </v-card-text>
           <v-card-actions class="mr-10 ml-10">
-            <v-btn to="/signUp" depressed rounded color="transparent">Sign up</v-btn>
+            <v-btn to="/signUp" depressed rounded color="transparent"
+              >Sign up</v-btn
+            >
             <v-spacer></v-spacer>
             <v-btn
               v-if="!this.loginLoad"
@@ -54,7 +62,7 @@
               size="26"
               width="3"
               color="accent lighten-2"
-              style="margin-right:38px"
+              style="margin-right: 38px"
             ></v-progress-circular>
           </v-card-actions>
         </v-card>
@@ -71,7 +79,7 @@ export default {
     password: "",
     error: false,
     loginLoad: false,
-    movies: []
+    movies: [],
   }),
   methods: {
     getMovies() {
@@ -81,7 +89,7 @@ export default {
       }
       this.$store
         .dispatch("GET_WEB_MOST_POPULAR_MOVIES_LIST", { page: 1, userId: uid })
-        .then(data => {
+        .then((data) => {
           if (data && data.constructor === Array) {
             this.movies.push(data.slice(0, 3));
           }
@@ -92,7 +100,7 @@ export default {
       this.$store
         .dispatch("LOGIN", {
           username: this.username,
-          password: this.password
+          password: this.password,
         })
         .then(() => {
           this.$router.push("/");
@@ -100,7 +108,7 @@ export default {
             .commit("SET_NOTIFICATION", {
               display: true,
               text: "Logged in!",
-              alertClass: "success"
+              alertClass: "success",
             })
             .catch(() => {
               this.error = true;
@@ -110,11 +118,11 @@ export default {
           this.loginLoad = false;
           this.error = true;
         });
-    }
+    },
   },
   beforeMount() {
     this.getMovies();
-  }
+  },
 };
 </script>
 
