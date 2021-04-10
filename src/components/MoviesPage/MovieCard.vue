@@ -26,7 +26,7 @@
 
       <v-flex
         v-if="this.item.relationTypeId > 0 && GET_USER"
-        class="'py-0 px-0 mr-0 ml-auto caption font-weight-thin accent--text text--lighten-2 d-none'"
+        class="'py-0 px-0 mr-0 ml-auto caption font-weight-light accent--text text--lighten-2 d-none'"
         style="max-width: 17%; width: auto"
       >{{ moviesAddTypes[this.item.relationTypeId] }}</v-flex>
 
@@ -71,11 +71,11 @@
           <v-row class="mx-0 pt-3 pl-4">
             <v-col class="px-0 py-0 font-italic font-weight-light white--text">{{ item.author }}</v-col>
             <v-col
-              class="pl-0 py-0 font-italic font-weight-light white--text text-right"
+              class="pl-0 py-0 font-italic font-weight-light caption white--text text-right"
             >{{ item.releaseDate }}</v-col>
           </v-row>
           <v-row
-            class="mx-0 pt-1 pl-4 pr-3 mr-6 caption text-no-wrap"
+            class="mx-0 pt-2 pl-4 pr-3 mr-6 caption text-no-wrap"
             style="overflow-x: hidden"
           >{{ item.genres }}</v-row>
         </v-card>

@@ -8,11 +8,11 @@
     >
       <v-spacer></v-spacer>
       <v-card class="transparent" style="width: 15%" flat>
-        <v-card-title class="font-weight-thin pb-0 px-0">Release date</v-card-title>
+        <v-card-title class="font-weight-thin caption pt-3 pb-1 px-0">Release date</v-card-title>
         <v-row class="mx-0">{{ this.movie.releaseDate }}</v-row>
-        <v-card-title class="font-weight-thin py-0 px-0">Author</v-card-title>
+        <v-card-title class="font-weight-thin caption pt-3 pb-1 px-0">Author</v-card-title>
         <v-row class="mx-0">{{ this.movie.author == null ? 'Unknown' : this.movie.author }}</v-row>
-        <v-card-title class="font-weight-thin py-0 px-0">Rating</v-card-title>
+        <v-card-title class="font-weight-thin caption pt-3 pb-1 px-0">Rating</v-card-title>
         <v-row class="mx-0" align="center">
           {{ this.movie.rating }}
           <v-container
@@ -21,7 +21,7 @@
             :style="'margin-left:10px; background:' + getColor(this.movie.rating)"
           ></v-container>
         </v-row>
-        <v-row v-if="getUser()" class="mx-0 mt-3">
+        <v-row v-if="getUser()" class="mx-0 mt-6">
           <v-menu transition="slide-x-transition" bottom close-on-click offset-y>
             <template v-slot:activator="{ on }">
               <v-btn
@@ -55,7 +55,7 @@
         <v-row
           v-show="getUser()"
           v-if="movie.relationTypeId != 0 && movie.relationTypeId != null"
-          class="mx-0 mt-2"
+          class="mx-0 mt-6"
         >
           <v-menu transition="slide-x-transition" bottom close-on-click offset-y>
             <template v-slot:activator="{ on }">

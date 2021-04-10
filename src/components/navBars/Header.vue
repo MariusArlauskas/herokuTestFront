@@ -18,7 +18,7 @@
               <v-avatar size="35px" color="var(--v-primary-lighten5)" class="mr-2">
                 <v-img contain max-height="33px" max-width="33px" src="../../assets/logo.png"></v-img>
               </v-avatar>
-              <v-content class="py-0 white--text">{{ GET_WEB_TITLE }}</v-content>
+              <v-main class="py-0 white--text">{{ GET_WEB_TITLE }}</v-main>
             </v-row>
           </router-link>
         </v-toolbar-title>
@@ -46,21 +46,18 @@
         <v-app-bar color="primary" max-height="100px" dark prominent>
           <v-layout wrap>
             <v-row style="width:100%">
-              <v-app-bar-nav-icon @click="changeBar()"></v-app-bar-nav-icon>
-              <div style="margin-left: auto; margin-right:2%;">
-                <SearchDialog />
-              </div>
+              <v-app-bar-nav-icon class="mt-2" @click="changeBar()"></v-app-bar-nav-icon>
               <v-app-bar-nav-icon
+                class="mr-14 ml-auto mt-2"
                 v-if="GET_USER.id"
-                style="margin-right:60px"
                 @click="changeProfileBar(true)"
               ></v-app-bar-nav-icon>
             </v-row>
             <v-row style="width:100%">
               <v-toolbar-title style="width: 100%" class="noScrollbar">
                 <router-link :to="{ name: 'HomePage' }">
-                  <v-col class="py-0" align="center">
-                    <v-content class="py-0 white--text">{{ GET_WEB_TITLE }}</v-content>
+                  <v-col class="my-0" align="center">
+                    <v-main class="my-0 white--text">{{ GET_WEB_TITLE }}</v-main>
                   </v-col>
                 </router-link>
               </v-toolbar-title>
@@ -77,8 +74,11 @@
           width="180px"
           v-model="navbar"
         >
-          <v-content class="py-4 white--text title text-center">{{ GET_WEB_TITLE }}</v-content>
+          <v-main class="py-4 white--text title text-center">{{ GET_WEB_TITLE }}</v-main>
           <v-divider></v-divider>
+          <v-layout justify-center class="ml-5">
+            <SearchDialog />
+          </v-layout>
           <v-list-item-group>
             <v-list-item
               v-for="(link, index) in links"

@@ -44,7 +44,7 @@
       <div v-for="(movie, index) in this.movies" :key="index">
         <v-layout
           @click="closeDialog(movie.movieId)"
-          class="fullRow caption font-weight-light mx-0"
+          class="fullRow caption font-weight-light mx-0 my-0"
           align-center
           style="height: 50px; width:100%; cursor:pointer"
           row

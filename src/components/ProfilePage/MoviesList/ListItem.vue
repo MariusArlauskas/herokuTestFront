@@ -1,16 +1,16 @@
 <template>
   <v-layout
-    class="fullRow caption font-weight-light mx-0"
+    class="fullRow caption font-weight-light mx-0 my-0"
     align-center
-    style="height: 50px; cursor:pointer"
+    style="height: 44px; cursor:pointer"
     row
     @click="$refs.movieDialog.dialog = true"
-    @mouseover="$refs.movieImage.style = 'height:180px; margin-left: -50px; max-width: 120px; margin-top: -138px'"
-    @mouseleave="$refs.movieImage.style = 'height:40px; margin-left: 30px; max-width: 40px'"
+    @mouseover="$refs.movieImage.style = 'height:180px; margin-left: -60px; max-width: 120px; margin-top: -148px'"
+    @mouseleave="$refs.movieImage.style = 'height:30px; margin-left: 30px; max-width: 30px'"
   >
     <v-flex
       ref="movieImage"
-      style="height:40px; margin-left: 30px; max-width: 40px; min-width:40px"
+      style="height:30px; margin-left: 30px; max-width: 30px; min-width:30px"
     >
       <MovieDialog ref="movieDialog" :movie="this.item" :moviesAddTypes="sendMoviesAddTypes()" />
     </v-flex>

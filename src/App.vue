@@ -2,7 +2,7 @@
   <v-app>
     <Header />
     <ProfileBar v-if="GET_USER.id && drawer" />
-    <v-content
+    <v-main
       class="mainBackground"
       :style="
         [
@@ -15,7 +15,7 @@
       "
     >
       <router-view />
-    </v-content>
+    </v-main>
     <Footer />
     <Notification />
   </v-app>
@@ -46,11 +46,6 @@ export default {
     },
   },
   beforeMount() {
-    // Cookies do not get saved on localhost so redirect
-    // let url = window.location.href.split("/")[2];
-    // if (url != "127.0.0.1:8080") {
-    //   window.location.href = "http://127.0.0.1:8080/";
-    // }
     this.getUser();
   },
 };

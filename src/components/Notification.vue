@@ -6,11 +6,13 @@
     right
     :timeout="NOTIFICATION.timeout"
   >
-    <v-icon dark>notification_important</v-icon>
-    <v-col class="white--text">{{ NOTIFICATION.text }}</v-col>
-    <v-btn text dark @click.prevent="snackbar = false">
-      <v-icon>clear</v-icon>
-    </v-btn>
+    <v-layout row>
+      <v-icon dark class="ml-3">notification_important</v-icon>
+      <v-col class="white--text">{{ NOTIFICATION.text }}</v-col>
+      <v-btn class="my-auto" text dark @click.prevent="snackbar = false">
+        <v-icon>clear</v-icon>
+      </v-btn>
+    </v-layout>
   </v-snackbar>
 </template>
 

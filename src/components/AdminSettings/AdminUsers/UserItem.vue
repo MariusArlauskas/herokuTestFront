@@ -1,8 +1,8 @@
 <template>
   <v-layout
-    class="fullRow caption font-weight-light mx-0"
+    class="fullRow caption font-weight-light mx-0 my-0"
     align-center
-    style="height: 55px; width:100%; cursor:pointer"
+    style="height: 50px; width:100%; cursor:pointer"
     row
     @click="jump()"
   >
@@ -23,8 +23,8 @@
     >{{ this.item.registerDate }}</v-col>
     <v-col
       v-on:click.stop
-      class="text-no-wrap pb-0"
-      style="margin-left:1%; max-width:13%; min-width:13%"
+      class="text-no-wraps pt-3 pb-0"
+      style="margin-left:1%; max-width:13%; min-width:13%; margin-top: -2px"
     >
       <v-select
         height="20px"
@@ -39,8 +39,8 @@
     </v-col>
     <v-col
       v-on:click.stop
-      class="text-no-wrap pb-0 pt-4"
-      style="margin-left:2%; max-width:11%; min-width:11%"
+      class="text-no-wrap pt-3 pb-0"
+      style="margin-left:2%; max-width:11%; min-width:11%; margin-bottom: -4px"
     >
       <v-menu
         ref="menu"
@@ -64,7 +64,7 @@
           ref="picker"
           no-title
           v-model="chatBannedUntil"
-          min="2000-01-01"
+          :min="getCurrentDate"
           :max="getMaxDate"
           @change="saveChatBannedUntil"
           style="border-radius: 0px"
@@ -104,7 +104,11 @@ export default {
     },
     getMaxDate() {
       var d = new Date();
-      d.setFullYear(d.getFullYear() + 10);
+      d.setFullYear(d.getFullYear() + 6);
+      return d.toISOString().substr(0, 10);
+    },
+    getCurrentDate() {
+      var d = new Date();
       return d.toISOString().substr(0, 10);
     }
   },

@@ -63,7 +63,7 @@
         </v-dialog>
         <v-btn
           v-show="GET_USER.id == item.userId && (typeof item.children == 'undefined' || item.children.length < 1) && !(typeof GET_USER.chatBannedUntil != 'undefined' && GET_USER.chatBannedUntil != null && new Date(GET_USER.chatBannedUntil) > new Date())"
-          style="margin:-1px 10px 0 0"
+          style="margin:-1px 0"
           right
           x-small
           icon
@@ -107,7 +107,7 @@
       <v-card-text
         v-else
         ref="message"
-        class="py-1 pb-2"
+        class="py-1 pb-2 pt-4"
         style="max-width:100%; overflow: hidden; white-space: pre-line;"
         v-html="decodeHtml(item.message)"
       ></v-card-text>

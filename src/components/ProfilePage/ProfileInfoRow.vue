@@ -42,11 +42,11 @@
           >Edit profile</router-link>
         </v-btn>
 
-        <v-card-title class="font-weight-thin pb-0 px-0">Users name</v-card-title>
-        <v-row class="mx-0">{{ this.user.name }}</v-row>
-        <v-card-title class="font-weight-thin py-0 px-0">Age</v-card-title>
+        <v-card-title class="font-weight-thin caption pb-1 pt-3 px-0">Name</v-card-title>
+        <v-row class="mx-0 h1">{{ this.user.name }}</v-row>
+        <v-card-title class="font-weight-thin caption pb-1 pt-3 px-0">Age</v-card-title>
         <v-row class="mx-0">{{ userAge }}</v-row>
-        <v-card-title class="font-weight-thin py-0 px-0">Registered from</v-card-title>
+        <v-card-title class="font-weight-thin caption pb-1 pt-3 px-0">Registered from</v-card-title>
         <v-row class="mx-0">{{ this.user.registerDate }}</v-row>
       </v-card>
     </v-layout>

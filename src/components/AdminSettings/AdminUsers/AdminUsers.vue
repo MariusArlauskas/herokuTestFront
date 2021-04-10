@@ -1,6 +1,6 @@
 <template>
   <v-card class="background lighten-1 py-1 px-1" flat dark>
-    <v-layout class="background mx-0" style="width:100%" row>
+    <v-layout class="background mx-0 my-0" style="width:100%" row>
       <v-progress-circular
         v-show="!this.noData"
         v-if="typeof this.users[0] == 'undefined' && this.users[0] == null"

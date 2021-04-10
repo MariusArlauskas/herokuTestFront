@@ -103,7 +103,7 @@ export default {
       { name: "All", value: "" },
       { name: "Only not in list", value: "0" }
     ],
-    genres: null
+    genres: []
   }),
   computed: {
     ...mapGetters(["GET_USER"]),

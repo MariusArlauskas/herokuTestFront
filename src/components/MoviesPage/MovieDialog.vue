@@ -46,9 +46,9 @@
       </v-card-title>
       <v-divider></v-divider>
 
-      <v-layout style="width:100%" class="mx-0" row>
+      <v-layout style="width:100%" class="mx-0 my-0" row>
         <v-col class="px-3" style="max-width: 170px">
-          <v-row class="mx-0">
+          <v-row class="mx-0 my-0">
             <v-menu v-if="getUser()" transition="slide-x-transition" bottom close-on-click offset-y>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -79,17 +79,17 @@
               </v-list>
             </v-menu>
           </v-row>
-          <v-row
+          <!-- <v-row
             justify="center"
-            class="mx-0 mt-3"
+            class="mx-0 mt-5"
             v-if="movie.relationTypeId != 0 && movie.relationTypeId != null"
             v-show="getUser()"
           >
             <span class="body-1 font-weight-light">Personal rating</span>
-          </v-row>
+          </v-row> -->
           <v-row
             v-show="getUser()"
-            class="mx-0"
+            class="mx-0 mt-2"
             v-if="movie.relationTypeId != 0 && movie.relationTypeId != null"
           >
             <v-menu transition="slide-x-transition" bottom close-on-click offset-y>

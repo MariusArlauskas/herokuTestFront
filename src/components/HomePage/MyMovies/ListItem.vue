@@ -1,14 +1,14 @@
 <template>
   <v-layout
-    class="fullRow caption font-weight-light mx-0"
+    class="fullRow caption font-weight-light mx-0 my-0"
     align-center
-    style="height: 50px; width:100%; cursor:pointer"
+    style="height: 44px; width:100%; cursor:pointer"
     row
     @click="$refs.movieDialog.dialog = true"
   >
     <v-flex
       ref="movieImage"
-      style="height:40px; margin-left: 10px; max-width: 40px; min-width:40px"
+      style="height:30px; margin-left: 10px; max-width: 30px; min-width:30px"
     >
       <MovieDialog ref="movieDialog" :movie="this.item" :moviesAddTypes="sendMoviesAddTypes()" />
     </v-flex>
