@@ -1,19 +1,11 @@
 import axios from "axios";
 
 const state = {
-  profileInfoLinks: [
-    { title: "Activities", icon: "mdi-view-dashboard", href: "HomePage" },
-    { title: "Movies", icon: "list", href: "HomePage" },
-    { title: "Social", icon: "mdi-help-box", href: "HomePage" }
-  ],
   user: {},
   drawer: false         // Show profile bar 
 };
 
 const getters = {
-  GET_PROFILE_INFO_LINKS: state => {
-    return state.profileInfoLinks;
-  },
   GET_USER_DRAWER: state => {
     return state.drawer;
   },
@@ -33,6 +25,48 @@ const getters = {
 };
 
 const actions = {
+  GET_USER_FOLLOWERS: (commit, userId) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`profile/` + userId + `/followers`)
+        .then(({ data, status }) => {
+          if (status === 200) {
+            resolve(data);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        })
+    });
+  },
+  GET_USER_FOLLOWS: (commit, userId) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`profile/` + userId + `/follows`)
+        .then(({ data, status }) => {
+          if (status === 200) {
+            resolve(data);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        })
+    });
+  },
+  FOLLOW_USER: (commit, { userId, followedUserId }) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`users/` + userId + `/follow/` + followedUserId)
+        .then(({ status }) => {
+          if (status === 200) {
+            resolve(true);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        })
+    });
+  },
   GET_USERS: () => {
     return new Promise((resolve, reject) => {
       axios

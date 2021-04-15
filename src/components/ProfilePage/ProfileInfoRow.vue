@@ -21,7 +21,7 @@
       <v-spacer class="hidden-sm-and-down" style="max-width:5%"></v-spacer>
       <v-card
         img
-        class="transparent hidden-sm-and-down"
+        class="transparent hidden-sm-and-down my-auto"
         flat
         max-width="12%"
         max-height="100%"
@@ -43,28 +43,73 @@
         </v-btn>
 
         <v-card-title class="font-weight-thin caption pb-1 pt-3 px-0">Name</v-card-title>
-        <v-row class="mx-0 h1">{{ this.user.name }}</v-row>
+        <v-row class="mx-0 h1">{{ this.user.name }}<span class="accent--text text--lighten-2 caption pl-2" v-show="GET_USER.role == 'Admin'">( UID-{{this.user.id}} )</span></v-row>
         <v-card-title class="font-weight-thin caption pb-1 pt-3 px-0">Age</v-card-title>
         <v-row class="mx-0">{{ userAge }}</v-row>
         <v-card-title class="font-weight-thin caption pb-1 pt-3 px-0">Registered from</v-card-title>
         <v-row class="mx-0">{{ this.user.registerDate }}</v-row>
+
+        <v-btn 
+          v-show="this.user.id != getLoggedInUserId()"
+          text
+          outlined
+          class="blue--text text--darken-1 mt-5"
+          @click="folowUser()"
+        >
+          <span v-if="isFollowed">UnFollow</span>
+          <span v-else>Follow</span>
+        </v-btn>
       </v-card>
     </v-layout>
   </v-card>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "ProfileInfoRow",
   props: {
     user: Object
   },
   computed: {
+    ...mapGetters(["GET_USER"]),
     userAge() {
       return new Date().getFullYear() - parseInt(this.user.birthDate);
+    },
+    isFollowed() {
+      if (typeof this.GET_USER.followingUsers == 'undefined') {
+        return false;
+      }
+      return this.GET_USER.followingUsers.includes(this.user.id);
     }
   },
   methods: {
+    folowUser() {
+      this.$store
+        .dispatch("FOLLOW_USER", {
+          userId: this.GET_USER.id,
+          followedUserId: this.user.id
+        })
+        .then(() => {
+          if (typeof this.GET_USER.followingUsers == "undefined") {
+            this.GET_USER.followingUsers = [];
+          }
+          var msg = "Now following this user!";
+          var color = "success";
+          if (this.isFollowed) {
+            var index = this.GET_USER.followingUsers.indexOf(this.user.id);
+            this.GET_USER.followingUsers.splice(index, 1);
+            msg = "Not following this user anymore!";
+            color = "warning";
+          } else {
+            this.GET_USER.followingUsers.push(this.user.id);
+          }
+          this.notify(msg, color);
+        })
+        .catch(() => {
+          this.notify("error", "error");
+        });
+    },
     getLoggedInUserId() {
       return this.$store.getters.GET_USER.id; // Add user id to its profile link
     },
@@ -72,8 +117,16 @@ export default {
       var txt = document.createElement("textarea");
       txt.innerHTML = html;
       return txt.value;
+    },
+    notify(msg, color) {
+      this.$store
+        .commit("SET_NOTIFICATION", {
+          display: true,
+          text: msg,
+          alertClass: color
+        })
     }
-  }
+  },
 };
 </script>
 

@@ -3,8 +3,10 @@
     <ProfileInfoRow :user="this.user" />
     <v-divider class="secondary lighten-1"></v-divider>
     <v-tabs background-color="secondary" dark>
-      <v-tab :to="{name: 'ProfileMainWall'}" :router="true" class="tab font-weight-thin">Main</v-tab>
-      <v-tab :to="{name: 'ProfileMoviesList'}" :router="true" class="font-weight-thin">Movies</v-tab>
+      <v-tab :to="{name: 'ProfileMainWall'}" :router="true" class="tab font-weight-light">Main</v-tab>
+      <v-tab :to="{name: 'ProfileMoviesList'}" :router="true" class="font-weight-light">Movies</v-tab>
+      <v-tab :to="{name: 'FollowsList'}" :router="true" class="font-weight-light">Following ( {{ this.getFollowingCount }} )</v-tab>
+      <v-tab :to="{name: 'FollowersList'}" :router="true" class="font-weight-light">Followers ( {{ this.getFollowersCount }} )</v-tab>
     </v-tabs>
     <router-view :userId="this.user.id" />
   </v-flex>
@@ -20,7 +22,19 @@ export default {
     user: {}
   }),
   computed: {
-    ...mapGetters(["GET_API_URL", "GET_USER"])
+    ...mapGetters(["GET_API_URL", "GET_USER"]),
+    getFollowingCount() {
+      if (typeof this.user.followingUsers == 'undefined') {
+        return 0;
+      }
+      return this.user.followingUsers.length;
+    },
+    getFollowersCount() {
+      if (typeof this.user.followers == 'undefined') {
+        return 0;
+      }
+      return this.user.followers.length;
+    }
   },
   methods: {
     setUserFromId() {

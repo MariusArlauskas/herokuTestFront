@@ -7,9 +7,22 @@ const getters = {
 };
 
 const actions = {
-  GET_MESSAGES: (commit, { page, id }) => {
+  GET_MESSAGES: (commit, { page, id, onlyFollowing = false }) => {
     return new Promise((resolve, reject) => {
-      axios.get('messages/' + page + '/' + id)
+      axios.get('messages/' + page + '/' + id + '/' + (onlyFollowing ? "true" : "false"))
+        .then(({ data, status }) => {
+          if (status === 200) {
+            resolve(data);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        })
+    })
+  },
+  GET_MESSAGES_FOLLOWING: (commit, { page, id }) => {
+    return new Promise((resolve, reject) => {
+      axios.get('messages/following/' + page + '/' + id)
         .then(({ data, status }) => {
           if (status === 200) {
             resolve(data);

@@ -33,8 +33,8 @@ export default {
   data: () => ({}),
   methods: {
     getUser() {
-      this.$store.commit("SET_USER_FROM_SESSION");
-    },
+      this.$store.dispatch("SET_USER");
+    }
   },
   computed: {
     ...mapGetters(["GET_USER_DRAWER", "GET_USER"]),
@@ -47,7 +47,7 @@ export default {
   },
   beforeMount() {
     this.getUser();
-  },
+  }
 };
 </script>
 

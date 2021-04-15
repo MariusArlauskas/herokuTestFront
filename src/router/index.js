@@ -10,6 +10,8 @@ import Movies from "../components/MoviesPage/MoviesMain";
 import Profile from "../components/ProfilePage/ProfileMain";
 import ProfileMainWall from "../components/ProfilePage/MoviesWall/MainWall";
 import ProfileMoviesList from "../components/ProfilePage/MoviesList/MoviesList";
+import FollowsList from "../components/ProfilePage/Follows/Follows";
+import FollowersList from "../components/ProfilePage/Followers/Followers";
 import ProfileEdit from "../components/UserSettings/ProfileEdit";
 import ProfileEditProfile from "../components/UserSettings/ProfileEditProfile";
 
@@ -48,6 +50,16 @@ const routes = [
         path: "movies",
         name: "ProfileMoviesList",
         component: ProfileMoviesList
+      },
+      {
+        path: "follows",
+        name: "FollowsList",
+        component: FollowsList
+      },
+      {
+        path: "followers",
+        name: "FollowersList",
+        component: FollowersList
       }
     ]
   },

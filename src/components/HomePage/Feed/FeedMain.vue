@@ -1,6 +1,17 @@
 <template>
   <v-layout column>
     <CommentBox v-show="GET_USER" @clicked="childAction" :parentId="0" :button="true" />
+    <v-card flat dark class=" background row d-flex align-center ml-auto pr-4">
+      <v-flex class="subtitle-2 grey--text pr-5" >
+        Following only
+      </v-flex>
+      <v-switch
+        v-model="followingSwitch"
+        inset
+        color="blue darken-1"
+        @click="switchToFollowing"
+      ></v-switch>
+    </v-card>
     <FeedItem
       v-for="(item, index) in this.messages"
       @deleted="deleteMsg(index)"
@@ -36,12 +47,18 @@ export default {
   data: () => ({
     messages: [],
     pagesEnd: false,
+    followingSwitch: false,
     timer: ""
   }),
   computed: {
     ...mapGetters(["GET_USER"])
   },
   methods: {
+    switchToFollowing() {
+      this.pagesEnd = false;
+      this.messages = [];
+      this.getMessages();
+    },
     deleteMsg(index) {
       if (
         typeof this.messages[index].parentId == "undefined" ||
@@ -77,7 +94,7 @@ export default {
     },
     getMessages() {
       this.$store
-        .dispatch("GET_MESSAGES", { page: this.messages.length + 1, id: 0 })
+        .dispatch("GET_MESSAGES", { page: this.messages.length + 1, id: 0, onlyFollowing: this.followingSwitch })
         .then(data => {
           if (
             typeof data[0] !== "undefined" &&
