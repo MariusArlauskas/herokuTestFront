@@ -1,7 +1,7 @@
 <template>
   <v-layout column>
     <CommentBox v-show="GET_USER" @clicked="childAction" :parentId="0" :button="true" />
-    <v-card flat dark class=" background row d-flex align-center ml-auto pr-4">
+    <v-card v-if="GET_USER.id > 0" flat dark class=" background row d-flex align-center ml-auto pr-4">
       <v-flex class="subtitle-2 grey--text pr-5" >
         Following only
       </v-flex>

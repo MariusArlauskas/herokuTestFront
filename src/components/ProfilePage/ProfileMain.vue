@@ -5,6 +5,7 @@
     <v-tabs background-color="secondary" dark>
       <v-tab :to="{name: 'ProfileMainWall'}" :router="true" class="tab font-weight-light">Main</v-tab>
       <v-tab :to="{name: 'ProfileMoviesList'}" :router="true" class="font-weight-light">Movies</v-tab>
+      <v-tab :to="{name: 'ProfileForum'}" :router="true" class="font-weight-light">Forum</v-tab>
       <v-tab :to="{name: 'FollowsList'}" :router="true" class="font-weight-light">Following ( {{ this.getFollowingCount }} )</v-tab>
       <v-tab :to="{name: 'FollowersList'}" :router="true" class="font-weight-light">Followers ( {{ this.getFollowersCount }} )</v-tab>
     </v-tabs>

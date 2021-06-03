@@ -25,6 +25,33 @@ const getters = {
 };
 
 const actions = {
+  SEARCH_USERS: (commit, { search, page }) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post('profile/find', { search: search, page: page })
+        .then(({ data, status }) => {
+          if (status === 200) {
+            resolve(data);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        })
+    });
+  },
+  GET_USER_FORUM: (commit, { userId, page }) => {
+    return new Promise((resolve, reject) => {
+      axios.get(`profile/` + userId + '/forum/page/' + page)
+        .then(({ data, status }) => {
+          if (status === 200) {
+            resolve(data);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        })
+    })
+  },
   GET_USER_FOLLOWERS: (commit, userId) => {
     return new Promise((resolve, reject) => {
       axios
@@ -67,10 +94,10 @@ const actions = {
         })
     });
   },
-  GET_USERS: () => {
+  GET_USER_BY_ID: (commit, { id }) => {
     return new Promise((resolve, reject) => {
       axios
-        .get('users')
+        .get('users/find/' + id)
         .then(({ data, status }) => {
           if (status === 200) {
             resolve(data);
@@ -104,10 +131,16 @@ const actions = {
       })
   },
   LOGOUT: ({ commit }) => {
-    axios.post(`logout`)
-      .then(() => {
-        commit("UNSET_USER");
-      })
+    return new Promise((resolve, reject) => {
+      axios.post(`logout`)
+        .then(() => {
+          commit("UNSET_USER");
+          resolve(true);
+        })
+        .catch(error => {
+          reject(error);
+        })
+    });
   },
   LOGIN: ({ dispatch }, payload) => {
     return new Promise((resolve, reject) => {

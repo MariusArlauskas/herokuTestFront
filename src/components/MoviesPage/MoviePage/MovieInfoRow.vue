@@ -1,7 +1,7 @@
 <template>
   <v-card class="topContainer secondary" max-height="290px" min-height="290px" dark flat>
     <v-layout
-      v-if="typeof this.movie != 'undefined' || this.movie != {}"
+      v-if="(typeof this.movie != 'undefined' || this.movie != {})"
       justify-center
       row
       style="padding: 20px 120px 20px 7%; height:290px; width:100%"
@@ -10,13 +10,11 @@
       <v-card class="transparent" style="width: 15%" flat>
         <v-card-title class="font-weight-thin caption pt-3 pb-1 px-0">Release date</v-card-title>
         <v-row class="mx-0">{{ this.movie.releaseDate }}</v-row>
-        <v-card-title class="font-weight-thin caption pt-3 pb-1 px-0">Author</v-card-title>
-        <v-row class="mx-0">{{ this.movie.author == null ? 'Unknown' : this.movie.author }}</v-row>
         <v-card-title class="font-weight-thin caption pt-3 pb-1 px-0">Rating</v-card-title>
         <v-row class="mx-0" align="center">
           {{ this.movie.rating }}
           <v-container
-            v-if="typeof this.movie.rating !== 'undefined' && this.movie.rating !== null && this.movie.rating != '' && this.movie.rating != 0"
+            v-if="(typeof this.movie.rating !== 'undefined' && this.movie.rating !== null && this.movie.rating != '' && this.movie.rating != 0)"
             class="colorIndicator"
             :style="'margin-left:10px; background:' + getColor(this.movie.rating)"
           ></v-container>
@@ -33,8 +31,13 @@
                 v-on="on"
               >
                 <span
-                  v-if="typeof moviesAddTypes[movie.relationTypeId] !== 'undefined' && moviesAddTypes[movie.relationTypeId] !== null && moviesAddTypes[movie.relationTypeId] != '' && movie.relationTypeId != 0"
-                >{{ moviesAddTypes[movie.relationTypeId] }}</span>
+                  v-if="(typeof moviesAddTypes[movie.relationTypeId] !== 'undefined' 
+                    && moviesAddTypes[movie.relationTypeId] !== null 
+                    && moviesAddTypes[movie.relationTypeId] != '' 
+                    && movie.relationTypeId != 0)"
+                >
+                  {{ moviesAddTypes[movie.relationTypeId] }}
+                </span>
                 <span v-else>Add to list</span>
               </v-btn>
             </template>
@@ -69,7 +72,7 @@
               >
                 <span
                   class="subtitle-1 font-weight-black"
-                  v-if="typeof movie.userRating !== 'undefined' && movie.userRating !== null && movie.userRating != '' && movie.userRating != 0"
+                  v-if="(typeof movie.userRating !== 'undefined' && movie.userRating !== null && movie.userRating != '' && movie.userRating != 0)"
                 >{{ movie.userRating }}</span>
                 <span v-else>Not rated</span>
               </v-btn>
@@ -85,7 +88,7 @@
       </v-card>
       <v-card img class="transparent" flat max-width="12%" max-height="100%" min-width="180px">
         <v-img
-          v-if="typeof this.movie.posterPath != 'undefined' && this.movie.posterPath != null"
+          v-if="(typeof this.movie.posterPath != 'undefined' && this.movie.posterPath != null)"
           contain
           max-height="100%"
           max-width="100%"
@@ -109,9 +112,15 @@
           </v-btn>
           {{ this.movie.originalTitle }}
         </v-card-title>
+        <v-card-text 
+          class="font-italic font-weight-light mb-2"
+          style="height: 10%; overflow-y: hidden; white-space: pre-line;"
+        >
+          {{ this.movie.genres }}
+        </v-card-text>
         <v-card-text
-          class="desc"
-          style="height: 80%; overflow-y: scroll; white-space: pre-line;"
+          class="desc pt-0"
+          style="height: 70%; overflow-y: scroll; white-space: pre-line;"
         >{{ this.movie.overview }}</v-card-text>
       </v-card>
     </v-layout>

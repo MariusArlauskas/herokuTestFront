@@ -8,7 +8,33 @@
     </template>
 
     <v-card
-      style="border-radius:25px; position: absolute; top:10%; left:30%"
+      style="position: absolute; top:10%; left:30%"
+      class="d-flex justify-center"
+      width="40%"
+      min-width="200px"
+      flat
+      color="transparent"
+    >
+      <v-tabs 
+        background-color="secondary" 
+        style="max-width: 290px; border-style: solid; border-color: var(--v-secondary-lighten2); border-bottom: none;"
+        fixed-tabs
+        show-arrows
+        height="25px"
+        class=""
+        dark
+        >
+        <v-tab 
+          class="caption" 
+          @click="searchObject = index; movies = []" 
+          v-for="(value, index) in allSearchObjects" :key="index"
+        >
+          {{ index }}
+        </v-tab>
+      </v-tabs>
+    </v-card>
+    <v-card
+      style="border-radius:25px; position: absolute; top:15%; left:30%"
       width="40%"
       min-width="200px"
       color="secondary lighten-1"
@@ -34,7 +60,7 @@
     <v-card
       dark
       v-show="movies.length > 0"
-      style="border-radius:10px; position: absolute; top:20%; left:25%; overflow-y: scroll"
+      style="border-radius:10px; position: absolute; top:22%; left:25%; overflow-y: scroll"
       class="noScrollbar"
       width="50%"
       min-width="200px"
@@ -49,9 +75,9 @@
           style="height: 50px; width:100%; cursor:pointer"
           row
         >
-          <v-flex style="height:40px; margin-left: 10px; max-width: 40px; min-width:40px">
+          <v-flex v-show="searchObject != 'FORUM'" style="height:40px; margin-left: 10px; max-width: 40px; min-width:40px">
             <v-img
-              v-if="typeof movie.posterPath !== 'undefined' && movie.posterPath !== null"
+              v-if="(typeof movie.posterPath !== 'undefined' && movie.posterPath !== null)"
               height="100%"
               :src="movie.posterPath"
             ></v-img>
@@ -79,22 +105,41 @@ export default {
   data: () => ({
     dialog: false,
     title: "",
-    movies: []
+    movies: [],
+    searchObject: "MOVIES",
+    allSearchObjects: {
+      MOVIES: "MovieMainWall",
+      PERSON: "PersonMovies",
+      FORUM: "ForumThread",
+      USERS: "ProfileMainWall",
+    }
   }),
   methods: {
     closeDialog(id) {
       this.movies = [];
       this.dialog = false;
       this.$router.push({
-        name: "MovieMainWall",
+        name: this.allSearchObjects[this.searchObject],
         params: { id: id }
       });
     },
     searchRecord() {
+      this.movies = [];
       this.$store
-        .dispatch("SEARCH_MOVIES", { search: this.title })
+        .dispatch("SEARCH_" + this.searchObject, { search: this.title })
         .then(data => {
           if (data && data.constructor === Array) {
+            switch(this.searchObject) {
+              case "PERSON":
+                data = this.convertPeopleData(data);
+                break;
+              case "FORUM":
+                data = this.convertForumData(data);
+                break;
+              case "USERS":
+                data = this.convertUsersData(data);
+                break;
+            }
             this.movies = data;
           }
         })
@@ -105,6 +150,38 @@ export default {
             alertClass: "error"
           });
         });
+    },
+    convertPeopleData(data) {
+      var newData = [];
+      data.forEach(item => {
+        var tempItem = [];
+        tempItem["title"] = item["name"];
+        tempItem["posterPath"] = item["profile_path"];
+        tempItem["movieId"] = item["id"];
+        newData.push(tempItem);
+      });
+      return newData;
+    },
+    convertForumData(data) {
+      var newData = [];
+      data.forEach(item => {
+        var tempItem = [];
+        tempItem["title"] = item["title"];
+        tempItem["movieId"] = item["id"];
+        newData.push(tempItem);
+      });
+      return newData;
+    },
+    convertUsersData(data) {
+      var newData = [];
+      data.forEach(item => {
+        var tempItem = [];
+        tempItem["posterPath"] = item["profilePicture"];
+        tempItem["title"] = item["name"];
+        tempItem["movieId"] = item["id"];
+        newData.push(tempItem);
+      });
+      return newData;
     }
   }
 };

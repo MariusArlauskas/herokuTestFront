@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="new Date(GET_USER.chatBannedUntil) > new Date()"
-      v-show="typeof GET_USER.chatBannedUntil != 'undefined' && GET_USER.chatBannedUntil != null"
+      v-show="(typeof GET_USER.chatBannedUntil != 'undefined' && GET_USER.chatBannedUntil != null)"
       class="caption accent--text text--lighten-2 mb-3 text-center"
     >Chat banned until {{ GET_USER.chatBannedUntil }}</div>
 

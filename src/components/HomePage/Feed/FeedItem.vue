@@ -62,7 +62,10 @@
           </v-card>
         </v-dialog>
         <v-btn
-          v-show="GET_USER.id == item.userId && (typeof item.children == 'undefined' || item.children.length < 1) && !(typeof GET_USER.chatBannedUntil != 'undefined' && GET_USER.chatBannedUntil != null && new Date(GET_USER.chatBannedUntil) > new Date())"
+          v-show="depth < 2 
+            && GET_USER.id == item.userId 
+            && (typeof item.children == 'undefined' || item.children.length < 1) 
+            && !(typeof GET_USER.chatBannedUntil != 'undefined' && GET_USER.chatBannedUntil != null && new Date(GET_USER.chatBannedUntil) > new Date())"
           style="margin:-1px 0"
           right
           x-small
@@ -78,7 +81,7 @@
       </v-row>
       <v-row v-else class="mx-0 mt-2 px-1"></v-row>
 
-      <div v-if="typeof item.posterPath !== 'undefined' && item.posterPath !== null">
+      <div v-if="(typeof item.posterPath !== 'undefined' && item.posterPath !== null)">
         <v-row>
           <v-col class="px-0 ml-7" style="max-width: 13%">
             <router-link :to="{ name: 'MovieMainWall', params: { id: item.movieId } }">

@@ -3,6 +3,7 @@ const state = {
   headerLinks: [
     { name: "Home", icon: "mdi-view-dashboard", href: "HomePage", classes: 'white--text', showWhenLoggedIn: true },
     { name: "Movies", icon: "list", href: "Movies", classes: 'white--text', showWhenLoggedIn: true },
+    { name: "Forum", icon: "list", href: "Forum", classes: 'white--text', showWhenLoggedIn: true },
     { name: "Login", icon: "keyboard_arrow_right", href: "Login", classes: 'accent--text text--lighten-2', showWhenLoggedIn: false },
     { name: "SignUp", icon: "keyboard_arrow_right", href: "SignUp", classes: 'secondary--text text--lighten-4', showWhenLoggedIn: false },
     { name: "About", icon: "mdi-help-box", href: "AboutPage", classes: 'white--text', showWhenLoggedIn: true }

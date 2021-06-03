@@ -22,7 +22,7 @@
           </v-container>
         </v-card>
       </v-layout>
-      <v-flex v-else class="mt-3 pt-5 text-center grey--text body-2">
+      <v-flex v-else class="my-3 pt-5 text-center grey--text body-2">
         You are not
         <span class="accent--text text--lighten-2">{{ names[index] }}</span> any movies
       </v-flex>

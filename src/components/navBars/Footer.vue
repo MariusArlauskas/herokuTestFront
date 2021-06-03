@@ -3,7 +3,7 @@
     <v-row justify="center">
       <p
         class="my-0 font-weight-light overline"
-      >&copy;2020 Marius Arlauskas IFF -6/7 - {{ GET_WEB_TITLE }}</p>
+      >&copy;2021 Marius Arlauskas IFF -6/7 - {{ GET_WEB_TITLE }}</p>
     </v-row>
   </v-footer>
 </template>

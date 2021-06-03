@@ -109,7 +109,7 @@ export default {
             this.getMovies("mostPopular");
           }
         }
-      }, 1500);
+      }, 5000);
     }
   },
   mounted() {

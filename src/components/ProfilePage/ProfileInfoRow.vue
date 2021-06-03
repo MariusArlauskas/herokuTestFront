@@ -50,7 +50,7 @@
         <v-row class="mx-0">{{ this.user.registerDate }}</v-row>
 
         <v-btn 
-          v-show="this.user.id != getLoggedInUserId()"
+          v-show="this.user.id != getLoggedInUserId() && GET_USER"
           text
           outlined
           class="blue--text text--darken-1 mt-5"

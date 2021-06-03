@@ -11,11 +11,13 @@
     </v-avatar>
     <v-col
       class="text-no-wrap"
-      style="max-width:15%; min-width:15%; overflow-x: hidden"
-    >{{ this.item.name }}</v-col>
+      style="max-width:20%; min-width:20%; overflow-x: hidden"
+    >
+      <span class="accent--text text--lighten-2 caption pr-1" v-show="GET_USER.role == 'Admin'">( UID-{{this.item.id}} )</span>{{ this.item.name }}
+    </v-col>
     <v-col
       class="text-no-wrap"
-      style="margin-left:1%; max-width:30%; min-width:30%; overflow-x: hidden"
+      style="margin-left:1%; max-width:25%; min-width:25%; overflow-x: hidden"
     >{{ this.item.email }}</v-col>
     <v-col
       class="text-no-wrap"
@@ -76,6 +78,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "UserItem",
   components: {},
@@ -92,6 +95,7 @@ export default {
     item: Object
   },
   computed: {
+    ...mapGetters(["GET_USER"]),
     getBanColor() {
       if (this.item.chatBannedUntil.length == 0) {
         return "var(--v-success-base);";

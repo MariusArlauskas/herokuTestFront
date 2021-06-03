@@ -3,8 +3,8 @@
 import Vue from 'vue';
 import axios from "axios";
 
-// axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
-axios.defaults.baseURL = 'https://my-movies-site-test-prod.herokuapp.com/api/';
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+// axios.defaults.baseURL = 'https://my-movies-site-test-prod.herokuapp.com/api/';
 axios.defaults.withCredentials = true;
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -13,7 +13,7 @@ axios.defaults.withCredentials = true;
 
 let config = {
   headers: { Pragma: 'no-cache' },
-  // baseURL: 'http://127.0.0.1:8000/api/', // doesn't work for some reason
+  // baseURL: 'http://127.0.0.1:8000/api/', // doesn't work
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
@@ -31,7 +31,7 @@ _axios.interceptors.request.use(
   }
 );
 
-import store from "../store/index";
+// import store from "../store/index";
 import router from '../router/index';
 
 // Add a response interceptor
@@ -44,12 +44,14 @@ axios.interceptors.response.use(
     // && (this.$route.name != 'Login' || this.$route.name != 'Signup')
     if ((error.response.status == 401 || error.response.status == 403)) {
       if (router.currentRoute.name != 'Login') {
-        router.push("/");
-        store.commit("SET_NOTIFICATION", {
-          display: true,
-          text: "Access denied!",
-          alertClass: "error"
-        });
+        // router.push("/login");
+        // store.commit("SET_NOTIFICATION", {
+        //   display: true,
+        //   text: "Please login to continue!",
+        //   alertClass: "error"
+        // });
+        // store.dispatch("LOGOUT");
+        router.push({ name:"HomePage" });
       }
     }
     return Promise.reject(error);

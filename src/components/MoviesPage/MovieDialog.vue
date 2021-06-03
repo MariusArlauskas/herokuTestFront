@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on }">
       <v-flex style="width:100%; height:100%; cursor:pointer" v-ripple v-on="on">
         <v-img
-          v-if="typeof movie.posterPath !== 'undefined' && movie.posterPath !== null"
+          v-if="(typeof movie.posterPath !== 'undefined' && movie.posterPath !== null)"
           height="100%"
           :src="movie.posterPath"
         ></v-img>
@@ -60,7 +60,10 @@
                   v-on="on"
                 >
                   <span
-                    v-if="typeof moviesAddTypes[movie.relationTypeId] !== 'undefined' && moviesAddTypes[movie.relationTypeId] !== null && moviesAddTypes[movie.relationTypeId] != '' && movie.relationTypeId != 0"
+                    v-if="(typeof moviesAddTypes[movie.relationTypeId] !== 'undefined' 
+                      && moviesAddTypes[movie.relationTypeId] !== null 
+                      && moviesAddTypes[movie.relationTypeId] != '' 
+                      && movie.relationTypeId != 0)"
                   >{{ moviesAddTypes[movie.relationTypeId] }}</span>
                   <span v-else>Add to list</span>
                 </v-btn>
@@ -79,14 +82,6 @@
               </v-list>
             </v-menu>
           </v-row>
-          <!-- <v-row
-            justify="center"
-            class="mx-0 mt-5"
-            v-if="movie.relationTypeId != 0 && movie.relationTypeId != null"
-            v-show="getUser()"
-          >
-            <span class="body-1 font-weight-light">Personal rating</span>
-          </v-row> -->
           <v-row
             v-show="getUser()"
             class="mx-0 mt-2"
@@ -104,7 +99,7 @@
                 >
                   <span
                     class="subtitle-1 font-weight-black"
-                    v-if="typeof movie.userRating !== 'undefined' && movie.userRating !== null && movie.userRating != '' && movie.userRating != 0"
+                    v-if="(typeof movie.userRating !== 'undefined' && movie.userRating !== null && movie.userRating != '' && movie.userRating != 0)"
                   >{{ movie.userRating }}</span>
                   <span v-else>Not rated</span>
                 </v-btn>
@@ -129,7 +124,7 @@
             <v-row
               class="pb-1"
               style="font-family: 'Courgette', cursive;"
-              v-if="typeof movie.overview !== 'undefined' && movie.overview !== null && this.movie.overview !== ''"
+              v-if="(typeof movie.overview !== 'undefined' && movie.overview !== null && this.movie.overview !== '')"
             >{{ movie.overview }}</v-row>
             <v-row class="pb-1" style="font-family: 'Courgette', cursive;" v-else>No description</v-row>
           </v-card-text>
